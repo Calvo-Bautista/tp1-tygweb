@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Nro 1</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logoRHCP.png" type="image/png">
+</head>
+<body>
+    <header id="header">
+        <img src="logoRHCP.png" alt="logo" id="logo">
+        <h1>TP Nro 1- Calvo, Bautista</h1>
+    </header>
+    
+    <div class="content-container">
+        <aside>
+            <a href="#" class="api-link" data-api="1">PokeAPI</a>
+            <a href="#" class="api-link" data-api="2">Link API 2</a>
+        </aside>
+        
+        <section id="main-content">
+            <div id="sinApi" class="sinApi">
+                <div id="frase" class="frases"></div>
+                <div id="expectativas"><p>Como expectativa de la catedra espero poder tener un mayor conocimiento de las areas del desarrollo de aplicaciones web escalables</p></div>
+            </div>
+            <div class="api" id="contenedorAPI"></div> 
+            <div id="pokemon-container" class="hidden">
+                <div class="search-container">
+                    <input type="text" id="pokemon-search" placeholder="Buscar Pokémon...">
+                    <button id="search-button">Buscar</button>
+                </div>
+                <div id="loading" class="hidden">Cargando Pokémon...</div>
+                <div id="pokemon-cards"></div>
+            </div>
+            <div id="mensaje"></div>
+        </section>
+    </div>
+    
+    <footer>
+        <p class="footer">TyG web año 2025</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
