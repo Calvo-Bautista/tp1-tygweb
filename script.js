@@ -169,7 +169,6 @@ function formatGeneration(generation) {
 }
 
 async function verPelicula() {
-    // const verAPI = document.getElementById("verAPI");
     const divPelicula = document.getElementById("pelicula");
     const API_KEY = 'f350efb6';
     const series = [

@@ -23,6 +23,7 @@ body {
     float: left;
     cursor: pointer;
 }
+
 .content-container {
     display: flex;
     flex: 1;
@@ -47,22 +48,24 @@ footer {
     text-align: right;
 }
 
-.footer{
+.footer {
     color: #ffffff;
     font-size: 20px;
 }
 
-
-.sinApi {
+.sinApi, .detalles-pelicula {
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: #803d3d;
+    margin: 20px 0;
+}
+
+.sinApi {
     height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #803d3d;
-    margin: 20px 0;
 }
 
 #expectativas {
@@ -101,7 +104,6 @@ footer {
 .hidden {
     display: none;
 }
-
 
 #pokemon-cards {
     display: grid;
@@ -162,6 +164,7 @@ footer {
     text-transform: capitalize;
 }
 
+/* Tipos de Pokémon */
 .type-normal { background-color: #A8A878; }
 .type-fire { background-color: #F08030; }
 .type-water { background-color: #6890F0; }
@@ -196,7 +199,6 @@ footer {
 .next-page-btn:hover {
     background-color: #a35b20;
 }
-
 
 #pelicula {
     margin-top: 20px;
