@@ -23,7 +23,6 @@ document.getElementById('logo').addEventListener('click', function() {
 // Seleccionar elementos del DOM
 const divSinApi = document.getElementById('sinApi');
 const apiLinks = document.querySelectorAll('.api-link');
-const mensajeElement = document.getElementById('mensaje');
 const pokemonContainer = document.getElementById('pokemon-container');
 const cartasPokemon = document.getElementById('pokemon-cards');
 const divPelicula = document.getElementById('pelicula');
@@ -32,6 +31,7 @@ const divPelicula = document.getElementById('pelicula');
 
 // Límite de Pokémon a mostrar inicialmente
 const POKEMON_LIMIT = 20;
+let offset = 0; // Variable para controlar la paginación
 
 // Agregar evento de clic a cada enlace
 apiLinks.forEach(link => {
@@ -43,10 +43,12 @@ apiLinks.forEach(link => {
         if (apiNumber === '1') {
             // Mostrar contenedor de Pokémon y ocultar mensaje
             pokemonContainer.classList.remove('hidden');
-            divResultados.classList.add('hidden');
+            divPelicula.classList.add('hidden');
             divSinApi.classList.add("hidden");
             divSinApi.classList.remove("sinApi");
 
+            // Resetear el offset cuando se cambia a la API de Pokémon
+            offset = 0;
             // Cargar Pokémon
             loadPokemons();
         } else if (apiNumber === '2') {
@@ -57,8 +59,6 @@ apiLinks.forEach(link => {
             divSinApi.classList.add("hidden");
             divSinApi.classList.remove("sinApi");
 
-            // clearContent(); // Limpiar contenido de resultados
-            // fetchRandomRaceResult(); // Obtener resultado de carrera aleatorio
             verPelicula(); // Llamada a la función para mostrar la película
         }
     });
@@ -71,13 +71,25 @@ async function loadPokemons() {
     try {
         cartasPokemon.innerHTML = '';
         
-        // Obtener lista de Pokémon
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${POKEMON_LIMIT}`);
+        // Obtener lista de Pokémon con offset
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${POKEMON_LIMIT}&offset=${offset}`);
         const data = await response.json();
         
         // Cargar cada Pokémon
         for (const pokemon of data.results) {
             await loadPokemonCard(pokemon.url);
+        }
+
+        // Crear botón de "Siguiente página" si hay más Pokémon
+        if (data.next) {
+            const nextButton = document.createElement('button');
+            nextButton.className = 'next-page-btn';
+            nextButton.textContent = 'Ver más Pokémon';
+            nextButton.addEventListener('click', () => {
+                offset += POKEMON_LIMIT;
+                loadPokemons();
+            });
+            cartasPokemon.appendChild(nextButton);
         }
         
     } catch (error) {
@@ -194,7 +206,6 @@ async function verPelicula() {
                 <h2>${data.Title} (${data.Year})</h2>
                 <img src="${data.Poster}" alt="Poster de ${data.Title}" class="poster-pelicula">
                 <div class="detalles-pelicula">
-                    <p><strong>Director:</strong> ${data.Director}</p>
                     <p><strong>Actores:</strong> ${data.Actors}</p>
                     <p><strong>País:</strong> ${data.Country}</p>
                     <p><strong>Género:</strong> ${data.Genre}</p>
@@ -202,7 +213,7 @@ async function verPelicula() {
                 </div>
             </div>
         `;
-        divPelicula.style.display = "block";
+        // divPelicula.style.display = "block";
     } catch (error) {
         console.error("Error al obtener la información de la película:", error);
         divPelicula.innerHTML = `
@@ -211,6 +222,6 @@ async function verPelicula() {
                 <p>Por favor, intente nuevamente más tarde.</p>
             </div>
         `;
-        divPelicula.style.display = "block";
+        // divPelicula.style.display = "block";
     }
 }

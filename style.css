@@ -83,37 +83,6 @@ footer {
     text-shadow: 2px 2px 4px blueviolet
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .api-link {
     display: block;
     margin: 20px;
@@ -132,29 +101,6 @@ footer {
 .hidden {
     display: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #pokemon-cards {
@@ -235,12 +181,22 @@ footer {
 .type-steel { background-color: #B8B8D0; }
 .type-fairy { background-color: #EE99AC; }
 
-#loading {
-    text-align: center;
-    padding: 20px;
-    font-size: 18px;
-    color: #555;
+.next-page-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #c26d28;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
+
+.next-page-btn:hover {
+    background-color: #a35b20;
+}
+
 
 #pelicula {
     margin-top: 20px;
@@ -248,3 +204,29 @@ footer {
     font-weight: bold;
     color: #333;
 }
+
+.poster-pelicula {
+    border: 3px solid #700e0e;
+    border-radius: 3%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0 20px 0;
+}
+
+.pelicula-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.detalles-pelicula {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #803d3d;
+}
+
