@@ -26,7 +26,7 @@ const apiLinks = document.querySelectorAll('.api-link');
 const mensajeElement = document.getElementById('mensaje');
 const pokemonContainer = document.getElementById('pokemon-container');
 const cartasPokemon = document.getElementById('pokemon-cards');
-
+const divPelicula = document.getElementById('pelicula');
 
 
 
@@ -43,7 +43,7 @@ apiLinks.forEach(link => {
         if (apiNumber === '1') {
             // Mostrar contenedor de Pokémon y ocultar mensaje
             pokemonContainer.classList.remove('hidden');
-            mensajeElement.textContent = '';
+            divResultados.classList.add('hidden');
             divSinApi.classList.add("hidden");
             divSinApi.classList.remove("sinApi");
 
@@ -52,10 +52,14 @@ apiLinks.forEach(link => {
         } else if (apiNumber === '2') {
             // Mostrar mensaje de API 2 y ocultar contenedor de Pokémon
             pokemonContainer.classList.add('hidden');
-            mensajeElement.textContent = `Soy la API ${apiNumber}`;
             cartasPokemon.innerHTML = '';
+            divPelicula.classList.remove('hidden');
             divSinApi.classList.add("hidden");
             divSinApi.classList.remove("sinApi");
+
+            // clearContent(); // Limpiar contenido de resultados
+            // fetchRandomRaceResult(); // Obtener resultado de carrera aleatorio
+            verPelicula(); // Llamada a la función para mostrar la película
         }
     });
 });
@@ -152,6 +156,61 @@ function formatGeneration(generation) {
     return `Generación ${genNumber}`;
 }
 
+async function verPelicula() {
+    // const verAPI = document.getElementById("verAPI");
+    const divPelicula = document.getElementById("pelicula");
+    const API_KEY = 'f350efb6';
+    const series = [
+        "Breaking Bad",
+        "Stranger Things",
+        "The Office",
+        "Game of Thrones",
+        "Hunter x Hunter",
+        "The Mandalorian",
+        "The Witcher",
+        "Dark",
+        "Sherlock",
+        "Drive to Survive",
+        "The Last of Us"
+    ];
+    const serieAleatoria = series[Math.floor(Math.random() * series.length)];
 
+    try {
+        const response = await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(serieAleatoria)}&type=series&apikey=${API_KEY}`);
 
+        
+        if (!response.ok) {
+            throw new Error(`Error en la respuesta de la API: ${response.status}`);
+        }
 
+        const data = await response.json();
+        
+        if (data.Error) {
+            throw new Error(data.Error);
+        }
+
+        divPelicula.innerHTML = `
+            <div class="pelicula-info">
+                <h2>${data.Title} (${data.Year})</h2>
+                <img src="${data.Poster}" alt="Poster de ${data.Title}" class="poster-pelicula">
+                <div class="detalles-pelicula">
+                    <p><strong>Director:</strong> ${data.Director}</p>
+                    <p><strong>Actores:</strong> ${data.Actors}</p>
+                    <p><strong>País:</strong> ${data.Country}</p>
+                    <p><strong>Género:</strong> ${data.Genre}</p>
+                    <p><strong>Trama:</strong> ${data.Plot}</p>
+                </div>
+            </div>
+        `;
+        divPelicula.style.display = "block";
+    } catch (error) {
+        console.error("Error al obtener la información de la película:", error);
+        divPelicula.innerHTML = `
+            <div class="error-mensaje">
+                <p>Lo sentimos, hubo un error al cargar la información de la película.</p>
+                <p>Por favor, intente nuevamente más tarde.</p>
+            </div>
+        `;
+        divPelicula.style.display = "block";
+    }
+}

@@ -242,3 +242,9 @@ footer {
     color: #555;
 }
 
+#pelicula {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
