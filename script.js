@@ -174,12 +174,11 @@ async function verPelicula() {
     const API_KEY = 'f350efb6';
     const series = [
         "Breaking Bad",
-        "Stranger Things",
         "The Office",
         "Game of Thrones",
         "Hunter x Hunter",
+        "Los Simuladores",
         "The Mandalorian",
-        "The Witcher",
         "Dark",
         "Sherlock",
         "Drive to Survive",
