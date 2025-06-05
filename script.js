@@ -212,7 +212,6 @@ async function verPelicula() {
                 </div>
             </div>
         `;
-        // divPelicula.style.display = "block";
     } catch (error) {
         console.error("Error al obtener la información de la película:", error);
         divPelicula.innerHTML = `
@@ -221,6 +220,5 @@ async function verPelicula() {
                 <p>Por favor, intente nuevamente más tarde.</p>
             </div>
         `;
-        // divPelicula.style.display = "block";
     }
 }
